@@ -1,7 +1,7 @@
 const nameRegex=RegExp("^[A-Z]{1}[A-Za-z\\s]{2,}$");
-const PhonenumberRegex=RegExp("^[0-9]{1}\\s{1}[7-9]{1}[0-9]{9}$");
+const PhonenumberRegex=RegExp("^[0-9]{2}\\s{1}[7-9]{1}[0-9]{9}$");
 const addressRegex=RegExp("^[a-zA-Z0-9#,&]$");
-const zipRegex=RegExp("^[0-9]{6}$");
+const zipRegex=RegExp("^[0-9]{3}\\s{0,1}[0-9]{3}$");
 
 class Contact{
     get id(){

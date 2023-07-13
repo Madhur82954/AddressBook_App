@@ -2,7 +2,7 @@ window.addEventListener("DOMContentLoaded",(event)=>{
     validatename();
     validatePhoneNumber();
     validateAddress();
-    validatezip;
+    validatezip();
 })
     const validatename = () => {
     const name=document.querySelector('#name');
@@ -72,7 +72,30 @@ window.addEventListener("DOMContentLoaded",(event)=>{
     })
 }
 
-function save(){
+const save = () => {
+    try{
+        let contact=createContact();
+        createAndUpdateStorage(contact);
+    }
+    catch(error){
+        alert(error);
+    }
+}
+
+const createAndUpdateStorage = (contact) => {
+    let contactList=JSON.parse(localStorage.getItem("ContactList"));
+    if(contactList!=undefined){
+        contactList.push(contact);
+    }
+    else{
+        contactList=[contact];
+    }
+    alert(contact.toString());
+    alert("Contact Added Succesfully");
+    localStorage.setItem("ContactList",JSON.stringify(contactList));
+}
+
+const createContact=()=>{
     let contact=new Contact();
     contact.id=new Date().getTime();
 
@@ -124,10 +147,11 @@ function save(){
     }
 
     alert(contact.toString());
+    return contact;
 }
 const settextvalue=(id,value)=>{
     const element=document.querySelector(id);
-    element.textcontent=value;
+    element.textContent=value;
 }
 
 function getInputValueById(property){
