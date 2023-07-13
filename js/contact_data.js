@@ -21,12 +21,12 @@ class Contact{
             throw "Name is Invalid";
         }
     }
-    get phonenumber(){
-        return this._phonenumber;
+    get phoneNumber(){
+        return this._phoneNumber;
     }
-    set phonenumber(phonenumber){
-        if(PhonenumberRegex.test(phonenumber)){
-            this._phonenumber=phonenumber;
+    set phoneNumber(phoneNumber){
+        if(PhonenumberRegex.test(phoneNumber)){
+            this._phoneNumber=phoneNumber;
         }
         else{
             throw "Phone Number is Invalid";
@@ -67,6 +67,6 @@ class Contact{
         }
     }
     toString(){
-        return "id ="+this.id+" , name = "+this.name+" , PhoneNumber = "+this.phonenumber+", Address = "+this.address+" , city = "+this.city+", state = "+this.state+", zip = "+this.zip;
+        return "id ="+this.id+" , name = "+this.name+" , PhoneNumber = "+this.phoneNumber+", Address = "+this.address+" , city = "+this.city+", state = "+this.state+", zip = "+this.zip;
     }
 }

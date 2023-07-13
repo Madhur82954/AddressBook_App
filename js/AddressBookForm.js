@@ -1,4 +1,10 @@
 window.addEventListener("DOMContentLoaded",(event)=>{
+    validatename();
+    validatePhoneNumber();
+    validateAddress();
+    validatezip;
+})
+    const validatename = () => {
     const name=document.querySelector('#name');
     name.addEventListener("input",function(){
         if(name.value.length==0){
@@ -13,7 +19,9 @@ window.addEventListener("DOMContentLoaded",(event)=>{
             settextvalue(".name-error",error);
         }
     })
+}
 
+    const validatePhoneNumber = () =>{
     const phoneNumber=document.querySelector('#phoneNumber');
     phoneNumber.addEventListener("input",function(){
         if(phoneNumber.value.length==0){
@@ -21,14 +29,16 @@ window.addEventListener("DOMContentLoaded",(event)=>{
             return;
         }
         try{
-            new Contact().phonenumber=phoneNumber.value;
+            new Contact().phoneNumber=phoneNumber.value;
             settextvalue(".tel-error","");
         }
         catch(error){
             settextvalue(".tel-error",error);
         }
     })
+}
 
+    const validateAddress = () =>{
     const address=document.querySelector('#address');
     address.addEventListener("input",function(){
         if(address.value.length==0){
@@ -43,7 +53,9 @@ window.addEventListener("DOMContentLoaded",(event)=>{
             settextvalue(".address-error",error);
         }
     })
-
+}
+ 
+    const validatezip = () =>{
     const zip=document.querySelector("#zip");
     zip.addEventListener("input",function(){
         if(zip.value.length==0){
@@ -58,8 +70,67 @@ window.addEventListener("DOMContentLoaded",(event)=>{
             settextvalue(".zip-error",error);
         }
     })
-})
+}
+
+function save(){
+    let contact=new Contact();
+    contact.id=new Date().getTime();
+
+    try{
+        contact.name=getInputValueById("#name");
+    }
+    catch(error){
+        settextvalue(".name-error",error);
+        throw error;
+    }
+
+    try{
+        contact.phoneNumber=getInputValueById("#phoneNumber");
+    }
+    catch(error){
+        settextvalue(".tel-error",error);
+        throw error;
+    }
+
+    try{
+        contact.address=getInputValueById("#address");
+    }
+    catch(error){
+        settextvalue(".address-error",error);
+        throw error;
+    }
+
+    let city=getInputValueById("#city");
+    if(city!="Select City"){
+        contact.city=city;
+    }
+    else{
+        throw "Please Select City";
+    }
+
+    let state=getInputValueById("#state");
+    if(state!="Select State"){
+        contact.state=state;
+    }
+    else{
+        throw "Please Select State";
+    }
+    try{
+        contact.zip=getInputValueById("#zip");
+    }
+    catch(error){
+        settextvalue(".zip-error".error);
+        throw error;
+    }
+
+    console.log(contact.toString());
+}
 const settextvalue=(id,value)=>{
     const element=document.querySelector(id);
     element.textcontent=value;
+}
+
+function getInputValueById(property){
+    let value=document.querySelector(property).value;
+    return value;
 }
