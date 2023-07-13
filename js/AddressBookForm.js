@@ -123,7 +123,7 @@ function save(){
         throw error;
     }
 
-    console.log(contact.toString());
+    alert(contact.toString());
 }
 const settextvalue=(id,value)=>{
     const element=document.querySelector(id);
