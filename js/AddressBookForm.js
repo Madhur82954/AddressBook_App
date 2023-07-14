@@ -2,21 +2,21 @@ window.addEventListener("DOMContentLoaded",(event)=>{
     validatename();
     validatePhoneNumber();
     validateAddress();
-    validatezip();
+    validatezipcode();
 })
     const validatename = () => {
     const name=document.querySelector('#name');
     name.addEventListener("input",function(){
         if(name.value.length==0){
-            settextvalue(".name-error","");
+            setTextValue(".name-error","");
             return;
         }
         try{
             new Contact().name=name.value;
-            settextvalue(".name-error","");
+            setTextValue(".name-error","");
         }
         catch(error){
-            settextvalue(".name-error",error);
+            setTextValue(".name-error",error);
         }
     })
 }
@@ -25,15 +25,15 @@ window.addEventListener("DOMContentLoaded",(event)=>{
     const phoneNumber=document.querySelector('#phoneNumber');
     phoneNumber.addEventListener("input",function(){
         if(phoneNumber.value.length==0){
-            settextvalue(".tel-error","");
+            setTextValue(".tel-error","");
             return;
         }
         try{
             new Contact().phoneNumber=phoneNumber.value;
-            settextvalue(".tel-error","");
+            setTextValue(".tel-error","");
         }
         catch(error){
-            settextvalue(".tel-error",error);
+            setTextValue(".tel-error",error);
         }
     })
 }
@@ -42,32 +42,32 @@ window.addEventListener("DOMContentLoaded",(event)=>{
     const address=document.querySelector('#address');
     address.addEventListener("input",function(){
         if(address.value.length==0){
-            settextvalue(".address-error","");
+            setTextValue(".address-error","");
             return;
         }
         try{
             new Contact().address=address.value;
-            settextvalue(".address-error","");
+            setTextValue(".address-error","");
         }
         catch(error){
-            settextvalue(".address-error",error);
+            setTextValue(".address-error",error);
         }
     })
 }
  
-    const validatezip = () =>{
+    const validatezipcode = () =>{
     const zip=document.querySelector("#zip");
     zip.addEventListener("input",function(){
         if(zip.value.length==0){
-            settextvalue(".zip-error","");
+            setTextValue(".zip-error","");
             return;
         }
         try{
             new Contact().zip=name.zip;
-            settextvalue(".zip-error","");
+            setTextValue(".zip-error","");
         }
         catch(error){
-            settextvalue(".zip-error",error);
+            setTextValue(".zip-error",error);
         }
     })
 }
@@ -103,7 +103,7 @@ const createContact=()=>{
         contact.name=getInputValueById("#name");
     }
     catch(error){
-        settextvalue(".name-error",error);
+        setTextValue(".name-error",error);
         throw error;
     }
 
@@ -111,7 +111,7 @@ const createContact=()=>{
         contact.phoneNumber=getInputValueById("#phoneNumber");
     }
     catch(error){
-        settextvalue(".tel-error",error);
+        setTextValue(".tel-error",error);
         throw error;
     }
 
@@ -119,7 +119,7 @@ const createContact=()=>{
         contact.address=getInputValueById("#address");
     }
     catch(error){
-        settextvalue(".address-error",error);
+        setTextValue(".address-error",error);
         throw error;
     }
 
@@ -142,19 +142,39 @@ const createContact=()=>{
         contact.zip=getInputValueById("#zip");
     }
     catch(error){
-        settextvalue(".zip-error".error);
+        setTextValue(".zip-error".error);
         throw error;
     }
 
     alert(contact.toString());
     return contact;
 }
-const settextvalue=(id,value)=>{
+const resetForm = () => {
+    setValue("#name", "");
+    setValue("#phoneNumber", "");
+    setValue("#address", "");
+    setSelectedIndex('#city', 0);
+    setSelectedIndex('#state', 0);
+    setValue("#zip", "");
+    setTextValue(".name-error", "");
+    setTextValue(".tel-error", "");
+    setTextValue(".address-error", "");
+    setTextValue(".zip-error", "");
+}
+  
+const setValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.value = value;
+}
+const setTextValue=(id,value)=>{
     const element=document.querySelector(id);
     element.textContent=value;
 }
-
-function getInputValueById(property){
+const setSelectedIndex = (id, index) => {
+    const element = document.querySelector(id);
+    element.selectedIndex = index;
+}
+const getInputValueById=(property)=>{
     let value=document.querySelector(property).value;
     return value;
 }
